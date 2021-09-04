@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Functional from "./components/Functional";
+import "./App.css";
+// import Class from "./components/Class";
+import { useState } from "react";
+import Input from "./components/Input";
+import HideShow from "./components/HideShow";
+import Class from "./components/Class";
+import FormValidtion from "./components/FormValidtion";
+import ConditionalRendering from "./components/ConditionalRendering";
+import FunctionAsProps from "./components/FunctionAsProps";
 
 function App() {
+  const [name, setName] = useState("___");
+  const [print, setPrint] = useState(false);
+
+  function getData() {
+    alert("hey this is function props");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <FunctionAsProps data={getData} />
+      <ConditionalRendering />
+      <FormValidtion />
+      <Input />
+      <HideShow />
+      {print ? <Functional name={name} /> : <Class />}
+      {/* button use for change the state */}
+
+      <div className="btn">
+        <button
+          onClick={() => {
+            setName("Components");
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Click
+        </button>
+        <button onClick={() => setPrint(!print)}>Toggle</button>
+      </div>
+
+      {/* <button onClick={() => setPrint(true)}>show</button> */}
+    </>
   );
 }
 
